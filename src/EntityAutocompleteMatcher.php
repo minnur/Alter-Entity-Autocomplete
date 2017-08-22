@@ -35,18 +35,18 @@ class EntityAutocompleteMatcher extends \Drupal\Core\Entity\EntityAutocompleteMa
           $entity = \Drupal::entityTypeManager()->getStorage($target_type)->load($entity_id);
           $entity = \Drupal::entityManager()->getTranslationFromContext($entity);
 
-          $lang = $entity->language()->getName();
-          $pub = '';
+          $type = $entity->type->entity->label();
+          $status = '';
           if ($entity->getEntityType()->id() == 'node') {
-            $pub = ($entity->isPublished()) ? ", Published" : ", Unpublished";
+            $status = ($entity->isPublished()) ? ", Published" : ", Unpublished";
           }
 
-          $key = $label.' ('.$entity_id.')';
+          $key = $label . ' (' . $entity_id . ')';
           // Strip things like starting/trailing white spaces, line breaks and tags.
           $key = preg_replace('/\s\s+/', ' ', str_replace("\n", '', trim(Html::decodeEntities(strip_tags($key)))));
           // Names containing commas or quotes must be wrapped in quotes.
           $key = Tags::encode($key);
-          $label = $label . ' (' . $entity_id . ') [' . $lang . $pub . ']';
+          $label = $label . ' (' . $entity_id . ') [' . $type . $status . ']';
           $matches[] = ['value' => $key, 'label' => $label];
         }
       }
