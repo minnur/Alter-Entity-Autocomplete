@@ -35,7 +35,7 @@ class EntityAutocompleteMatcher extends \Drupal\Core\Entity\EntityAutocompleteMa
           $entity = \Drupal::entityTypeManager()->getStorage($target_type)->load($entity_id);
           $entity = \Drupal::entityManager()->getTranslationFromContext($entity);
 
-          $type = $entity->type->entity->label();
+          $type = !empty($entity->type->entity) ? $entity->type->entity->label() : $entity->bundle();
           $status = '';
           if ($entity->getEntityType()->id() == 'node') {
             $status = ($entity->isPublished()) ? ", Published" : ", Unpublished";
