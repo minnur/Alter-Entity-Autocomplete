@@ -1,10 +1,13 @@
 services:
 
   alter_entity_autocomplete.route_subscriber:
-    class: Drupal\alter_entity_autocomplete\Routing\AutocompleteRouteSubscriber
-    tags:
+   class: Drupal\alter_entity_autocomplete\Routing\AutocompleteRouteSubscriber
+   tags:
       - { name: event_subscriber }
 
   alter_entity_autocomplete.autocomplete_matcher:
-    class: Drupal\alter_entity_autocomplete\EntityAutocompleteMatcher
+    class: Drupal\alter_entity_autocomplete\AlteredEntityAutocompleteMatcher
     arguments: ['@plugin.manager.entity_reference_selection']
+
+  alter_entity_autocomplete.get_node_info:
+    class: Drupal\alter_entity_autocomplete\NodeInfoGetter

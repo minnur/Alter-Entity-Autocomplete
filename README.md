@@ -10,4 +10,4 @@ There are several cases where nodes of different content types have the same tit
 
 Hope this will be useful in your projects and provide better editorial experience.
 
-Module developed by [Minnur Yunusov](https://www.minnur.com) at [Chapter Three](https://www.chapterthree.com)
+Module developed by [Minnur Yunusov](https://www.minnur.com) at [Chapter Three](https://www.chapterthree.com) and modified by federico prato @ [Siili Solutions](https://siili.com)
