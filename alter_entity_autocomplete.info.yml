@@ -2,3 +2,5 @@ name: Alter Entity Autocomplete
 description: The module alters entity autocomplete suggestion list.
 type: module
 core: 8.x
+dependencies:
+  - drupal:token
