@@ -1,50 +1,5 @@
 <?php
-
 /**
  * @file
- * Alters autocomplete for relations.
+ * Alters autocomplete for references.
  */
-
-use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Url;
-
-/**
- * @file
- * Alters the autocomplete output for related entities.
- */
-
-/**
- * Implements hook_form_alter().
- *
- * We change the information displayed for link fields when they have a default.
- * Adding node type and status the same way as we do with EntityAutocompleteMatcher.
- */
-function alter_entity_autocomplete_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  $entity_fields = $form_state->getFormObject()->getEntity()->getFieldDefinitions();
-  $entity = $form_state->getFormObject()->getEntity();
-  foreach ($entity_fields as $field) {
-    if ($field->getType() == "link") {
-      if (isset($form[$field->getName()])) {
-        foreach ($form[$field->getName()]['widget'] as $i => $widget) {
-          if (isset($widget['uri']['#default_value'])) {
-            $field_node = $form_state->getFormObject()->getEntity()->get($field->getName());
-            if (isset($field_node->getValue()[$i]['uri'])) {
-              $nid = explode("/", $field_node->getValue()[$i]['uri']);
-              $entity_id = end($nid);
-              if (!is_numeric($entity_id)) {
-                return;
-              }
-              $entity = \Drupal::entityTypeManager()->getStorage($form[$field->getName()]['widget'][$i]['uri']['#target_type'])->load($entity_id);
-              $entity = \Drupal::entityManager()->getTranslationFromContext($entity);
-
-              $infogetter = \Drupal::service('alter_entity_autocomplete.get_node_info');
-              $infogetter->setNode($entity);
-              $label = $infogetter->getInfo();
-              $form[$field->getName()]['widget'][$i]['uri']['#default_value'] = $label;
-            }
-          }
-        }
-      }
-    }
-  }
-}

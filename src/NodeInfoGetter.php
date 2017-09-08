@@ -8,6 +8,10 @@ use Drupal\Core\Entity\Entity;
  * Service to output info about nodes in Autocompleters.
  */
 class NodeInfoGetter {
+
+  /**
+   * @var Entity
+   */
   protected $node;
   protected $infoToken;
 
@@ -21,7 +25,7 @@ class NodeInfoGetter {
   /**
    * Sets the node for this object.
    *
-   * @param Drupal\Core\Entity\Entity $node
+   * @param \Drupal\Core\Entity\Entity $node
    *   The node to be used.
    */
   public function setNode(Entity $node) {
@@ -36,7 +40,7 @@ class NodeInfoGetter {
    */
   public function getInfo() {
     $token_service = \Drupal::service('token');
-    $txt = $token_service->replace("[node:title] - ([node:nid]) [[node:type]", ['node' => $this->node]);
+    $txt = $token_service->replace("[node:title] - ([node:nid]) [[node:type-name]", ['node' => $this->node]);
     if ($this->node->getEntityType()->id() == 'node') {
       $status = ($this->node->isPublished()) ? " - Published" : " - Unpublished";
       $txt .= " " . $status . "]";

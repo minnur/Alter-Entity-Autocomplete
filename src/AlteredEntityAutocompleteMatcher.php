@@ -35,8 +35,8 @@ class AlteredEntityAutocompleteMatcher extends EntityAutocompleteMatcher {
       foreach ($entity_labels as $values) {
         foreach ($values as $entity_id => $label) {
 
-          $entity = \Drupal::entityTypeManager()->getStorage($target_type)->load($entity_id);
-          $entity = \Drupal::entityManager()->getTranslationFromContext($entity);
+          $entity = \Drupal::service('entity_type.manager')->getStorage($target_type)->load($entity_id);
+          $entity = \Drupal::service('entity.repository')->getTranslationFromContext($entity);
           $infogetter = \Drupal::service('alter_entity_autocomplete.get_node_info');
           $infogetter->setNode($entity);
           $label = $infogetter->getInfo();
