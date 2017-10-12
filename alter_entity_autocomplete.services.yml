@@ -9,5 +9,5 @@ services:
     class: Drupal\alter_entity_autocomplete\AlteredEntityAutocompleteMatcher
     arguments: ['@plugin.manager.entity_reference_selection']
 
-  alter_entity_autocomplete.get_node_info:
-    class: Drupal\alter_entity_autocomplete\NodeInfoGetter
+  alter_entity_autocomplete.get_entity_info:
+    class: Drupal\alter_entity_autocomplete\EntityInfoGetter

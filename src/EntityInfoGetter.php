@@ -7,12 +7,12 @@ use Drupal\Core\Entity\Entity;
 /**
  * Service to output info about nodes in Autocompleters.
  */
-class NodeInfoGetter {
+class EntityInfoGetter {
 
   /**
    * @var Entity
    */
-  protected $node;
+  protected $entity;
   protected $infoToken;
 
   /**
@@ -25,11 +25,11 @@ class NodeInfoGetter {
   /**
    * Sets the node for this object.
    *
-   * @param \Drupal\Core\Entity\Entity $node
+   * @param \Drupal\Core\Entity\Entity $entity
    *   The node to be used.
    */
-  public function setNode(Entity $node) {
-    $this->node = $node;
+  public function setEntity(Entity $entity) {
+    $this->entity = $entity;
   }
 
   /**
@@ -40,10 +40,16 @@ class NodeInfoGetter {
    */
   public function getInfo() {
     $token_service = \Drupal::service('token');
-    $txt = $token_service->replace("[node:title] - ([node:nid]) [[node:type-name]", ['node' => $this->node]);
-    if ($this->node->getEntityType()->id() == 'node') {
-      $status = ($this->node->isPublished()) ? " - Published" : " - Unpublished";
-      $txt .= " " . $status . "]";
+    $txt = "";
+    if ($this->entity) {
+      if ($this->entity->getEntityType()->id() == 'node') {
+        $txt = $token_service->replace("[node:title] - ([node:nid]) [[node:type-name]", ['node' => $this->entity]);
+        $status = ($this->entity->isPublished()) ? " - Published" : " - Unpublished";
+        $txt .= " " . $status . "]";
+      }
+      else {
+        $txt = $this->entity->label() . " - (" . $this->entity->id() . ")";
+      }
     }
     return $txt;
   }

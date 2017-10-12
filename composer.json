@@ -1,0 +1,14 @@
+{
+  "name": "drupal/alter-entity-autocomplete",
+  "description": "Alter entity autocomplete shows more info on entity references and link widgets.",
+  "type": "drupal-module",
+  "homepage": "https://github.com/fede-green/Alter-Entity-Autocomplete",
+  "authors": [
+    {
+      "name": "Federico Prato",
+      "homepage": "https://www.drupal.org/u/joey-santiago"
+    }
+  ],
+  "license": "GPL-2.0+",
+  "require": { }
+}
