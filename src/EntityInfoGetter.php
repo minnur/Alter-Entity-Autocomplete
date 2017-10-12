@@ -10,9 +10,16 @@ use Drupal\Core\Entity\Entity;
 class EntityInfoGetter {
 
   /**
-   * @var Entity
+   * The entity we should get info from.
+   *
+   * @var Drupal\Core\Entity\Entity
    */
   protected $entity;
+  /**
+   * The string we use to return the info.
+   *
+   * @var string
+   */
   protected $infoToken;
 
   /**
@@ -43,14 +50,14 @@ class EntityInfoGetter {
     $txt = "";
     if ($this->entity) {
       if ($this->entity->getEntityType()->id() == 'node') {
-        $txt = $token_service->replace("[node:title] - ([node:nid]) [[node:type-name]", ['node' => $this->entity]);
-        $status = ($this->entity->isPublished()) ? " - Published" : " - Unpublished";
-        $txt .= " " . $status . "]";
+        $txt = $token_service->replace($this->infoToken, ['node' => $this->entity]);
       }
       else {
         $txt = $this->entity->label() . " - (" . $this->entity->id() . ")";
       }
     }
+    $status = ($this->entity->isPublished()) ? "Published" : "Unpublished";
+    $txt .= " [" . $status . "]";
     return $txt;
   }
 

@@ -2,7 +2,6 @@
 
 namespace Drupal\alter_entity_autocomplete\Plugin\Field\FieldWidget;
 
-
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Field\Plugin\Field\FieldWidget\EntityReferenceAutocompleteWidget;

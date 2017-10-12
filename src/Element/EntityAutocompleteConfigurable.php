@@ -72,8 +72,8 @@ class EntityAutocompleteConfigurable extends EntityAutocomplete {
 
       // Take into account "autocreated" entities.
       if (!$entity->isNew()) {
-        $infogetter = \Drupal::service('alter_entity_autocomplete.get_node_info');
-        $infogetter->setNode($entity);
+        $infogetter = \Drupal::service('alter_entity_autocomplete.get_entity_info');
+        $infogetter->setEntity($entity);
         $label = $infogetter->getInfo();
       }
 
