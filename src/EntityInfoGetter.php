@@ -15,18 +15,11 @@ class EntityInfoGetter {
    * @var Drupal\Core\Entity\Entity
    */
   protected $entity;
-  /**
-   * The string we use to return the info.
-   *
-   * @var string
-   */
-  protected $infoToken;
 
   /**
    * Creates a NodeInfoGetter service.
    */
   public function __construct() {
-    $this->infoToken = "[node:title] ([node:nid]) [[node:type]]";
   }
 
   /**
@@ -50,14 +43,25 @@ class EntityInfoGetter {
     $txt = "";
     if ($this->entity) {
       if ($this->entity->getEntityType()->id() == 'node') {
-        $txt = $token_service->replace($this->infoToken, ['node' => $this->entity]);
+        $type = $token_service->replace("[node:type-name]", ["node" => $this->entity]);
+        $title = $token_service->replace("[node:title]", ["node" => $this->entity]);
+        $nid = $token_service->replace("[node:nid]", ["node" => $this->entity]);
+        /* Removing parenthesis from title and type as Drupal take everything
+        in parenthesis for ID.*/
+        $type = str_replace(["(", ")"], "", $type);
+        $title = str_replace(["(", ")"], "", $title);
+        $txt = $title . " (" . $nid . ") [" . $type . "]";
+
       }
       else {
-        $txt = $this->entity->label() . " - (" . $this->entity->id() . ")";
+        // Removing parenthesis here too.
+        $txt = str_replace(["(", ")"], "", $this->entity->label()) . " - (" . $this->entity->id() . ")";
       }
     }
-    $status = ($this->entity->isPublished()) ? "Published" : "Unpublished";
-    $txt .= " [" . $status . "]";
+    if ($this->entity instanceof EntityPublishedTrait) {
+      $status = ($this->entity->isPublished()) ? "Published" : "Unpublished";
+      $txt .= " [" . $status . "]";
+    }
     return $txt;
   }
 
