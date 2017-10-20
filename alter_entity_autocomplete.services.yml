@@ -11,3 +11,4 @@ services:
 
   alter_entity_autocomplete.get_entity_info:
     class: Drupal\alter_entity_autocomplete\EntityInfoGetter
+    arguments: ['@token']

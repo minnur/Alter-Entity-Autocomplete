@@ -3,6 +3,9 @@
 namespace Drupal\alter_entity_autocomplete;
 
 use Drupal\Core\Entity\Entity;
+use Drupal\Core\Utility\Token;
+use Drupal\Core\Entity\EntityPublishedTrait;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Service to output info about nodes in Autocompleters.
@@ -15,11 +18,20 @@ class EntityInfoGetter {
    * @var Drupal\Core\Entity\Entity
    */
   protected $entity;
+  /**
+   * The token service.
+   *
+   * @var Drupal\Core\Utility\Token
+   */
+  protected $tokenizer;
 
   /**
-   * Creates a NodeInfoGetter service.
+   * Constructs the EntityInfoGetter.
+   *
+   * @var \Drupal\Core\Utility\Token
    */
-  public function __construct() {
+  public function __construct(Token $tokenizer) {
+    $this->tokenizer = $tokenizer;
   }
 
   /**
@@ -39,13 +51,12 @@ class EntityInfoGetter {
    *   The info based on configuration.
    */
   public function getInfo() {
-    $token_service = \Drupal::service('token');
     $txt = "";
     if ($this->entity) {
       if ($this->entity->getEntityType()->id() == 'node') {
-        $type = $token_service->replace("[node:type-name]", ["node" => $this->entity]);
-        $title = $token_service->replace("[node:title]", ["node" => $this->entity]);
-        $nid = $token_service->replace("[node:nid]", ["node" => $this->entity]);
+        $type = $this->tokenizer->replace("[node:type-name]", ["node" => $this->entity]);
+        $title = $this->tokenizer->replace("[node:title]", ["node" => $this->entity]);
+        $nid = $this->tokenizer->replace("[node:nid]", ["node" => $this->entity]);
         /* Removing parenthesis from title and type as Drupal take everything
         in parenthesis for ID.*/
         $type = str_replace(["(", ")"], "", $type);
