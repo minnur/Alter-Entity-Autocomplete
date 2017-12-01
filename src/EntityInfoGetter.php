@@ -67,6 +67,7 @@ class EntityInfoGetter {
       else {
         // Removing parenthesis here too.
         $txt = str_replace(["(", ")"], "", $this->entity->label()) . " - (" . $this->entity->id() . ")";
+        $txt = $txt . " [" . $this->entity->bundle() . "]";
       }
     }
     if ($this->entity instanceof EntityPublishedTrait) {
