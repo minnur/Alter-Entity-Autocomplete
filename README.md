@@ -1,3 +1,8 @@
+# Drupal 8 and Drupal 9 premium version with the UI
+
+Control all suggestion label patterns in the UI. The interface is very similar to Pathauto module UI.
+See [https://downloads.minnur.com/drupal/autocomplete-labels](https://downloads.minnur.com/drupal/autocomplete-labels)
+
 # Alter Entity Autocomplete module for Drupal 8
 
 Simple module to alter Drupal 8 autocomplete field behaviour. This also alters autocomplete link for Links.
