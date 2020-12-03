@@ -2,7 +2,7 @@
 
 Control all suggestion label patterns in the UI. The interface is very similar to Pathauto module UI. Built using config entities meaning you will be able to export/import configuration yaml files.
 
-See [https://downloads.minnur.com/drupal/autocomplete-labels](https://downloads.minnur.com/drupal/autocomplete-labels)
+See [https://downloads.minnur.com/drupal/entity-reference-patterns](https://downloads.minnur.com/drupal/entity-reference-patterns)
 You will get all the updates and new features with the purchase.
 
 # Alter Entity Autocomplete module for Drupal 8
