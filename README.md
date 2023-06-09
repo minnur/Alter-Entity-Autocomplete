@@ -1,9 +1,8 @@
-# Drupal 8 and Drupal 9 premium version with the UI
+# Drupal 9/10 version
 
 Control all suggestion label patterns in the UI. The interface is very similar to Pathauto module UI. Built using config entities meaning you will be able to export/import configuration yaml files.
 
-See [https://downloads.minnur.com/drupal/entity-reference-patterns](https://downloads.minnur.com/drupal/entity-reference-patterns)
-You will get all the updates and new features with the purchase.
+Download it here [https://www.drupal.org/project/entity_reference_patterns](https://www.drupal.org/project/entity_reference_patterns)
 
 # Alter Entity Autocomplete module for Drupal 8
 
@@ -17,4 +16,4 @@ There are several cases where nodes of different content types have the same tit
 
 Hope this will be useful in your projects and provide better editorial experience.
 
-Module developed by [Minnur Yunusov](https://www.minnur.com) at [Chapter Three](https://www.chapterthree.com)
+Module developed by [Minnur Yunusov](https://www.minnur.com)
